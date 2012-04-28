@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2005 rel. 3 U (http://www.altova.com) by  () -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="sql">
+		<xs:annotation>
+			<xs:documentation>Comment describing your root element</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="log" type="xs:boolean">
+					<xs:annotation>
+						<xs:documentation>If log sql</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="dbconfig" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence maxOccurs="unbounded">
+							<xs:element name="table">
+								<xs:complexType>
+									<xs:sequence minOccurs="0">
+										<xs:element name="statement" maxOccurs="unbounded">
+											<xs:complexType mixed="true">
+												<xs:attribute name="name" use="required"/>
+												<xs:attribute name="desc">
+													<xs:annotation>
+														<xs:documentation>Statement description</xs:documentation>
+													</xs:annotation>
+												</xs:attribute>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+									<xs:attribute name="name" use="required"/>
+									<xs:attribute name="alias" use="required"/>
+									<xs:attribute name="pk" use="required"/>
+									<xs:attribute name="pktype" use="required">
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:enumeration value="number"/>
+												<xs:enumeration value="text"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:attribute>
+									<xs:attribute name="defaultSortBy" use="required">
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:enumeration value=""/>
+												<xs:enumeration value="desc"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:attribute>
+									<xs:attribute name="desc">
+										<xs:annotation>
+											<xs:documentation>Table description</xs:documentation>
+										</xs:annotation>
+									</xs:attribute>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="default" type="xs:boolean" use="required"/>
+						<xs:attribute name="dataSource" use="required"/>
+						<xs:attribute name="type" use="required">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:enumeration value="oracle"/>
+									<xs:enumeration value="mssql"/>
+									<xs:enumeration value="mysql"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:attribute>
+						<xs:attribute name="encoding" use="required">
+							<xs:simpleType>
+								<xs:restriction base="xs:string">
+									<xs:enumeration value="UTF-8"/>
+									<xs:enumeration value="gbk"/>
+									<xs:enumeration value="gb2312"/>
+									<xs:enumeration value="latin"/>
+								</xs:restriction>
+							</xs:simpleType>
+						</xs:attribute>
+						<xs:attribute name="sequencyTable"/>
+						<xs:attribute name="sequencyCacheSize" type="xs:integer"/>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

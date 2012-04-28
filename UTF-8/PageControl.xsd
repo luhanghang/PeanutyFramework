@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2005 rel. 3 U (http://www.altova.com) by  () -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="PageControl">
+		<xs:annotation>
+			<xs:documentation>PageControl root</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="DefaultPage" minOccurs="0"/>
+				<xs:element name="DefaultFailurePage" minOccurs="0"/>
+				<xs:element name="PrivilegeClass" minOccurs="0"/>
+				<xs:element name="EventLog" minOccurs="0">
+					<xs:complexType>
+						<xs:attribute name="log" type="xs:boolean" use="required"/>
+						<xs:attribute name="class" use="required"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Object" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence minOccurs="0">
+							<xs:element name="Action" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:sequence maxOccurs="unbounded">
+										<xs:element name="NextPage">
+											<xs:complexType>
+												<xs:sequence minOccurs="0">
+													<xs:element name="Parameter" maxOccurs="unbounded">
+														<xs:complexType>
+															<xs:attribute name="For" use="required">
+																<xs:simpleType>
+																	<xs:restriction base="xs:string">
+																		<xs:enumeration value="success"/>
+																		<xs:enumeration value="failure"/>
+																	</xs:restriction>
+																</xs:simpleType>
+															</xs:attribute>
+															<xs:attribute name="GetFromRequest" type="xs:boolean" use="required"/>
+															<xs:attribute name="Name" use="required"/>
+															<xs:attribute name="Value" use="required"/>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+												<xs:attribute name="Success" use="required">
+													<xs:annotation>
+														<xs:documentation>next page path for forward or redirect, or 'text' means response a text string, or 'xml' means response a xml string</xs:documentation>
+													</xs:annotation>
+												</xs:attribute>
+												<xs:attribute name="Failure"/>
+												<xs:attribute name="RedirectType" use="required">
+													<xs:simpleType>
+														<xs:restriction base="xs:string">
+															<xs:enumeration value=""/>
+															<xs:enumeration value="forward"/>
+															<xs:enumeration value="redirect"/>
+														</xs:restriction>
+													</xs:simpleType>
+												</xs:attribute>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+									<xs:attribute name="Operation" use="required"/>
+									<xs:attribute name="ClassScope" use="required">
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:enumeration value=""/>
+												<xs:enumeration value="request"/>
+												<xs:enumeration value="session"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:attribute>
+									<xs:attribute name="Privilege"/>
+									<xs:attribute name="Desc"/>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+						<xs:attribute name="Name" use="required"/>
+						<xs:attribute name="Alias"/>
+						<xs:attribute name="Class" use="required"/>
+						<xs:attribute name="Desc">
+							<xs:annotation>
+								<xs:documentation>Object Description</xs:documentation>
+							</xs:annotation>
+						</xs:attribute>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
